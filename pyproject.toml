@@ -48,3 +48,39 @@ readme = {file = ["README.md"], content-type = "text/markdown"}
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["gesha"]
+
+[project.optional-dependencies]
+test = [
+    "black",
+    "mypy",
+    "pytest",
+    "pytest-cov",
+    "ruff",
+]
+
+[tool.mypy]
+warn_unused_configs = true
+ignore_missing_imports = true
+files = [
+    "gesha/**/*.py",
+    "tests/**/*.py",
+]
+
+[tool.ruff]
+select = [
+    "F",     # Pyflakes
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "I",     # isort
+    "B",     # flake8-bugbear
+    "C",     # flake8-comprehensions and mccabe
+]
+fixable = [
+    "I",     # isort
+]
+ignore = [
+    "E501",  # line too long
+]
+
+[tool.ruff.mccabe]
+max-complexity = 5
