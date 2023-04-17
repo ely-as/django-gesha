@@ -1,0 +1,36 @@
+{
+  "name": "django-gesha",
+  "version": "0.1.0-alpha0",
+  "description": "JavaScript utilities for Django projects.",
+  "main": "gesha/static/gesha/dist/js/django-gesha.bundle.min.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ely-as/django-gesha.git"
+  },
+  "author": "elyas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ely-as/django-gesha/issues"
+  },
+  "homepage": "https://github.com/ely-as/django-gesha",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "dotenv": "^16.0.3",
+    "fancy-log": "^2.0.0",
+    "gulp": "^4.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "tsify": "^5.0.4",
+    "typescript": "^5.0.4",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^4.0.0"
+  }
+}
