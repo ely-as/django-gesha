@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-gesha"
+authors = [
+    {name = "elyas", email = "elyas@ely.as"},
+]
+description = "JavaScript utilities for Django projects."
+requires-python = ">=3.8"
+keywords = ["django", "javascript"]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Typing :: Typed",
+    "Framework :: Django",
+    "Framework :: Django :: 2.2",
+    "Framework :: Django :: 3.0",
+    "Framework :: Django :: 3.1",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.0",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+]
+dependencies = [
+    "Django",
+]
+dynamic = ["version", "readme"]
+
+[project.urls]
+homepage = "https://github.com/ely-as/django-gesha"
+repository = "https://github.com/ely-as/django-gesha"
+changelog = "https://github.com/ely-as/django-gesha/blob/main/CHANGELOG.md"
+
+[tool.setuptools.dynamic]
+version = {attr = "gesha.__version__"}
+readme = {file = ["README.md"], content-type = "text/markdown"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gesha"]
