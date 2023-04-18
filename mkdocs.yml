@@ -1,0 +1,8 @@
+site_name: django-gesha
+site_description: JavaScript utilities for Django projects.
+repo_url: https://github.com/ely-as/django-gesha
+edit_uri: blob/main/docs/
+theme:
+    name: material
+nav:
+    - Home: index.md

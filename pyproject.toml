@@ -50,6 +50,10 @@ where = ["."]
 include = ["gesha"]
 
 [project.optional-dependencies]
+doc = [
+    "mkdocs",
+    "mkdocs-material",
+]
 test = [
     "black",
     "mypy",
