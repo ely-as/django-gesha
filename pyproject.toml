@@ -57,10 +57,14 @@ doc = [
 test = [
     "black",
     "mypy",
-    "pytest",
+    "pytest>=7",      # >=7 required for pythonpath option
     "pytest-cov",
+    "pytest-django",
     "ruff",
 ]
+
+[tool.coverage.run]
+omit = ["tests/fake_project/*"]
 
 [tool.mypy]
 warn_unused_configs = true
@@ -68,6 +72,13 @@ ignore_missing_imports = true
 files = [
     "gesha/**/*.py",
     "tests/**/*.py",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "fake.settings"
+pythonpath = [
+  ".",
+  "tests/fake_project",
 ]
 
 [tool.ruff]
