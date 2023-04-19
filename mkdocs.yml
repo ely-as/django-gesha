@@ -7,3 +7,4 @@ theme:
 nav:
     - Home: index.md
     - Installation: installation.md
+    - User Guide: user_guide.md
