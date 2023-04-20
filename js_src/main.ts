@@ -1,11 +1,14 @@
 // Single point of entry `django` for browser API
 declare global {
     interface Window {
-        django: any;
+        django: object;
     }
 }
 
-window.django = window.django || {};
+export function setup(w: Window) {
+    w.django = w.django || {};
+}
 
-// Declare that this is a module - can be removed when we add imports
-export {};
+if (typeof window !== "undefined") {
+    setup(window);
+}
