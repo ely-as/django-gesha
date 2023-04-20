@@ -19,13 +19,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
-      - name: Install tox and tox-gh-actions
+      - name: Install tox
         run: |
           python -m pip install --upgrade pip
-          pip install tox tox-gh-actions
+          pip install "tox>=4.0"
       - name: Run tox
-        # Run tox using the version of Python in `PATH`
-        run: tox
+        run: tox -m py${{ matrix.python }}
       - name: Upload pytest coverage results
         uses: actions/upload-artifact@v3
         with:
