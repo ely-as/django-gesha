@@ -4,10 +4,11 @@
   "description": "JavaScript utilities for Django projects.",
   "main": "gesha/static/gesha/dist/js/django-gesha.bundle.min.js",
   "directories": {
-    "test": "tests"
+    "test": "js_tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint ./js_*/**/*.ts",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -20,13 +21,21 @@
   },
   "homepage": "https://github.com/ely-as/django-gesha",
   "devDependencies": {
+    "@types/jsdom": "^21.1.1",
+    "@types/mocha": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
     "browserify": "^17.0.0",
     "dotenv": "^16.0.3",
+    "eslint": "^8.38.0",
     "fancy-log": "^2.0.0",
     "gulp": "^4.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
+    "jsdom": "^21.1.1",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
     "tsify": "^5.0.4",
     "typescript": "^5.0.4",
     "vinyl-buffer": "^1.0.1",
