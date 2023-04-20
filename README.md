@@ -33,6 +33,10 @@ them automatically once the [app is installed](#install-app-in-django-project).
 python manage.py collectstatic
 ```
 
+## Contributing
+
+See [Contributing](docs/contributing.md).
+
 ## License
 
 [MIT](https://github.com/ely-as/django-gesha/blob/main/LICENSE).
