@@ -69,7 +69,7 @@ def load_package_json() -> dict:
 
 
 def load_python_package_metadata() -> dict:
-    return metadata("django-gesha").json
+    return {k.lower(): v for k, v in metadata("django-gesha").items()}  # type: ignore[attr-defined]
 
 
 def test_npm_version_is_semver() -> None:
