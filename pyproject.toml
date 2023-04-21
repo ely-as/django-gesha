@@ -37,7 +37,7 @@ dependencies = [
 dynamic = ["version", "readme"]
 
 [project.urls]
-homepage = "https://github.com/ely-as/django-gesha"
+homepage = "https://django-gesha.readthedocs.io/en/stable/"
 repository = "https://github.com/ely-as/django-gesha"
 changelog = "https://github.com/ely-as/django-gesha/blob/main/CHANGELOG.md"
 
