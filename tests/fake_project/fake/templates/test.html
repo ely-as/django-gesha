@@ -7,7 +7,10 @@
     <title>django-gesha test page</title>
   </head>
   <body>
-    {% load static %}
-    <script src="{% static 'gesha/dist/js/django-gesha.bundle.min.js' %}"></script>
+
+    {% load gesha static %}
+    {% jscontext %}
+    <script src="{% static 'gesha/dist/js/django-gesha.bundle.min.js' %}">
+    </script>
   </body>
 </html>
