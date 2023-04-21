@@ -1,6 +1,9 @@
 # django-gesha ☕
 
 [![Test](https://github.com/ely-as/django-gesha/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/ely-as/django-gesha/actions/workflows/test.yml)
+![Version](https://img.shields.io/pypi/v/django-gesha)
+![Python](https://img.shields.io/pypi/pyversions/django-gesha)
+![Django](https://img.shields.io/pypi/djversions/django-gesha)
 
 JavaScript utilities for [Django](https://www.djangoproject.com/) projects.
 
@@ -15,7 +18,7 @@ Many more [features are planned](https://github.com/ely-as/django-gesha/labels/f
 ### Install to Python environment using pip
 
 ```sh
-pip install git+https://github.com/ely-as/django-gesha
+pip install django-gesha
 ```
 
 ### Install app in Django project

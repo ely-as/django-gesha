@@ -1,7 +1,7 @@
 ## Install to Python environment using pip
 
 ```sh
-pip install git+https://github.com/ely-as/django-gesha
+pip install django-gesha
 ```
 
 ## Install app in Django project
