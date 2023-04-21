@@ -87,7 +87,7 @@ Access the context data using the `django` JavaScript API:
 
 ## Contributing
 
-See [Contributing](https://django-gesha.readthedocs.io/en/stable/contributing/).
+See [Contributing](https://django-gesha.readthedocs.io/en/latest/contributing/).
 
 ## License
 

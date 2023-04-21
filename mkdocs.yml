@@ -1,6 +1,6 @@
 site_name: django-gesha
 site_description: JavaScript utilities for Django projects.
-site_url: https://django-gesha.readthedocs.io/en/stable/
+site_url: https://django-gesha.readthedocs.io/en/latest/
 repo_url: https://github.com/ely-as/django-gesha
 edit_uri: blob/main/docs/
 theme:
