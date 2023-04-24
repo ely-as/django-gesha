@@ -1,7 +1,11 @@
 ## Requirements
 
-- Python 3.8 or higher
+- Python 3.10 or higher *
 - Node.js 16.0 or higher
+
+<small>
+  django-gesha supports Python >= 3.8, but type checking requires or Python >= 3.10.
+</small>
 
 ## Set up test environment
 
