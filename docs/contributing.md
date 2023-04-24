@@ -33,6 +33,11 @@ Activate:
 source venv/bin/activate
 ```
 
+Upgrade pip:
+```sh
+pip install --upgrade pip
+```
+
 ### Install editable django-gesha
 
 ```sh
@@ -53,6 +58,25 @@ Run the `format` tox environment to apply formatting:
 ```sh
 tox -e format
 ```
+
+### Type-hinting Python code
+
+Include the following import in Python modules:
+
+```py
+from __future__ import annotations
+```
+
+This adds support for the following PEPs in the corresponding Python versions:
+
+- [PEP 563](https://peps.python.org/pep-0563/) – Postponed Evaluation of Annotations **(<=3.9)**
+- [PEP 585](https://peps.python.org/pep-0585/) – Type Hinting Generics In Standard Collections **(==3.8)**
+- [PEP 604](https://peps.python.org/pep-0604/) – Allow writing union types as `X | Y` **(<=3.9)**
+
+In addition, when declaring custom types use the
+[`TYPE_CHECKING` constant](https://peps.python.org/pep-0484/#runtime-or-type-checking)
+to prevent execution during runtime (otherwise this may cause issues when running
+Python >= 3.9).
 
 ### Build JavaScript assets
 
@@ -90,4 +114,11 @@ tox -e test
 
 ```sh
 npm test
+```
+
+## Documentation
+
+Preview changes to documentation:
+```sh
+mkdocs serve
 ```
