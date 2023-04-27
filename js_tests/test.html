@@ -2,7 +2,21 @@
 <html>
   <body>
     <script id="js_context_data" type="application/json">
-      {"myNumber": 5, "myString": "this is a string"}
+      {
+        "_gesha": {
+          "paths": {
+            "namespace:page": {
+              "name": "namespace:page",
+              "route": "/page/<int:num>/<int:num>",
+              "args": {
+                "num": "int"
+              }
+            }
+          }
+        },
+        "myNumber": 5,
+        "myString": "this is a string"
+      }
     </script>
   </body>
 </html>

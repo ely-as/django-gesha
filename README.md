@@ -10,6 +10,7 @@ JavaScript utilities for [Django](https://www.djangoproject.com/) projects.
 **Current features:**
 
   - Easily add JavaScript context in class-based views and access it via a JavaScript API.
+  - Reverse URLs in JavaScript (instead of using `reverse` in Python, or `url` in templates).
 
 Many more [features are planned](https://github.com/ely-as/django-gesha/labels/feature) ✍️.
 

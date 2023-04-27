@@ -43,3 +43,13 @@ Access the context data using the `django` JavaScript API:
 >> console.log(django.context.myString)
    "this is my string"
 ```
+
+Reverse a URL, for example, if in your Django template you would use:
+```
+{% url 'myapp:page' id=5 %}
+```
+
+You can do the following in the JavaScript API:
+```js
+>> django.reverse("myapp:page", { id: 5 })
+```
