@@ -11,8 +11,11 @@ JavaScript utilities for [Django](https://www.djangoproject.com/) projects.
 
   - Easily add JavaScript context in class-based views and access it via a JavaScript API.
   - Reverse URLs in JavaScript (instead of using `reverse` in Python, or `url` in templates).
+  - Many more [features are planned](https://github.com/ely-as/django-gesha/labels/feature).
 
-Many more [features are planned](https://github.com/ely-as/django-gesha/labels/feature) ✍️.
+**Documentation:** https://django-gesha.readthedocs.io/en/latest/
+
+**Issues:** https://github.com/ely-as/django-gesha/issues
 
 ## Installation
 
@@ -87,6 +90,16 @@ Access the context data using the `django` JavaScript API:
 
 >> console.log(django.context.myString)
    "this is my string"
+```
+
+Reverse a URL, for example, if in your Django template you would use:
+```
+{% url 'myapp:page' id=5 %}
+```
+
+You can do the following in the JavaScript API:
+```js
+>> django.reverse("myapp:page", { id: 5 })
 ```
 
 ## Contributing
