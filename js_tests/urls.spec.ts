@@ -12,7 +12,7 @@ interface TestURL {
 
 describe("Test urls module: reverse func", () => {
   const testURLs: TestURL[] = [
-    { name: "namespace:page", kwargs: { num: "5" }, expected_url: "/page/5/5" }
+    { name: "fake:page", kwargs: { num: "5" }, expected_url: "/page/5" }
   ];
 
   before(async () => {

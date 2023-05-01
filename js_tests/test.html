@@ -1,13 +1,24 @@
 <!doctype html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>django-gesha test page</title>
+  </head>
   <body>
     <script id="js_context_data" type="application/json">
       {
         "_gesha": {
           "paths": {
-            "namespace:page": {
-              "name": "namespace:page",
-              "route": "/page/<int:num>/<int:num>",
+            "fake:test": {
+              "name": "fake:test",
+              "route": "/",
+              "args": {}
+            },
+            "fake:page": {
+              "name": "fake:page",
+              "route": "/page/\u003Cint:num\u003E",
               "args": {
                 "num": "int"
               }
@@ -17,6 +28,8 @@
         "myNumber": 5,
         "myString": "this is a string"
       }
+    </script>
+    <script src="/static/gesha/dist/js/django-gesha.bundle.min.js">
     </script>
   </body>
 </html>
