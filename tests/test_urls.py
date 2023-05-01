@@ -17,10 +17,11 @@ urlpatterns: types.URLPatterns = [
     path("", include((
         [
             path("", view, name="index"),
-            path("a/<int:a>/b/<int:a>/", view, name="same_arg_twice"),
-            path("ns2", include((
+            path("a/<slug:a>/b/<int:b>/", view, name="two_args"),
+            path("ns2/", include((
                 [
-                    path("b/", view, name="double_nested_namespace")
+                    path("b/", view, name="double_nested_namespace"),
+                    path("/c/", view, name="leading_slash_in_namespace"),
                 ],
                 "ns2"
             ))),
@@ -45,15 +46,21 @@ expected_paths: list[types.PathInfo] = [
         "args": {},
     },
     {
-        "name": "ns1:same_arg_twice",
-        "route": "/a/<int:a>/b/<int:a>/",
+        "name": "ns1:two_args",
+        "route": "/a/<slug:a>/b/<int:b>/",
         "args": {
-            "a": "int",
+            "a": "slug",
+            "b": "int",
         },
     },
     {
         "name": "ns1:ns2:double_nested_namespace",
         "route": "/ns2/b/",
+        "args": {},
+    },
+    {
+        "name": "ns1:ns2:leading_slash_in_namespace",
+        "route": "/ns2/c/",
         "args": {},
     },
     {
@@ -115,3 +122,58 @@ def test_paths_dict_does_not_contain_unnamed_urls(paths_dict: types.Paths) -> No
 def test_get_paths_dict_can_load_default_urlconf() -> None:
     paths_dict = urls.get_paths_dict()
     assert "fake:test" in paths_dict
+
+
+get_args_expected_results: list[tuple[str, dict[str, str]]] = [
+    ("/<int:num>", {"num": "int"}),
+    ("/<int:num>/<slug:slug>", {"num": "int", "slug": "slug"}),  # 2 args, diff type
+    ("/<int:num>/<int:id>", {"num": "int", "id": "int"}),  # 2 args, same type
+]
+
+
+@pytest.mark.parametrize("route,expected_result", get_args_expected_results)
+def test_get_args_returns_expected_result(
+    route: str, expected_result: dict[str, str]
+) -> None:
+    result = urls.get_args(route)
+    for url_arg, converter_name in expected_result.items():
+        assert url_arg in result
+        assert result[url_arg] == converter_name
+
+
+namejoin_expected_results: list[tuple[list[str], str]] = [
+    ([], ""),
+    ([""], ""),
+    (["ns1", "", "viewname"], "ns1:viewname"),
+    (["ns1", "", "", "viewname"], "ns1:viewname"),
+    (["ns1", "ns2", "viewname"], "ns1:ns2:viewname"),
+]
+
+
+@pytest.mark.parametrize("args,expected_result", namejoin_expected_results)
+def test_namejoin_returns_expected_result(
+    args: list[str], expected_result: str
+) -> None:
+    assert urls.namejoin(*args) == expected_result
+
+
+pathjoin_expected_results: list[tuple[list[str], str]] = [
+    ([], "/"),
+    (["foo"], "/foo"),
+    (["/foo"], "/foo"),
+    (["foo", "bar"], "/foo/bar"),
+    # preferred by Django i.e. include() with trailing /, route with no starting /:
+    (["foo/", "bar"], "/foo/bar"),
+    # Django will warn against this (route starting with /), but still run:
+    (["foo/", "/bar"], "/foo/bar"),
+    (["foo", "", "bar"], "/foo/bar"),
+    (["foo", "", "", "bar"], "/foo/bar"),
+    (["foo/", "", "/bar"], "/foo/bar"),
+]
+
+
+@pytest.mark.parametrize("args,expected_result", pathjoin_expected_results)
+def test_pathjoin_returns_expected_result(
+    args: list[str], expected_result: str
+) -> None:
+    assert urls.pathjoin(*args) == expected_result
