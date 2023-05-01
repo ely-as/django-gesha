@@ -21,7 +21,7 @@ urlpatterns: types.URLPatterns = [
             path("ns2/", include((
                 [
                     path("b/", view, name="double_nested_namespace"),
-                    path("/c/", view, name="leading_slash_in_namespace"),
+                    path("/c/", view, name="leading_slash_in_namespaced_path"),
                 ],
                 "ns2"
             ))),
@@ -59,7 +59,7 @@ expected_paths: list[types.PathInfo] = [
         "args": {},
     },
     {
-        "name": "ns1:ns2:leading_slash_in_namespace",
+        "name": "ns1:ns2:leading_slash_in_namespaced_path",
         "route": "/ns2/c/",
         "args": {},
     },

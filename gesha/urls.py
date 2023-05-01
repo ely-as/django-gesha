@@ -24,7 +24,7 @@ def namejoin(*names: str) -> str:
 
 def pathjoin(*paths: str) -> str:
     """Create the path component of a URL from its segments."""
-    return urljoin("/", posixpath.join("", *paths))
+    return urljoin("/", posixpath.join("", *(p.lstrip("/") for p in paths)))
 
 
 def iter_patterns(  # noqa: C901 (complexity: 6 > 5)
