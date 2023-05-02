@@ -23,6 +23,7 @@ export class Converter {
 }
 
 const defaultConverters: Converter[] = [
+  // copied from Python package Django (django.urls.converters)
   new Converter("int", /^[0-9]+$/),
   new Converter("path", /^.+$/),
   new Converter("slug", /^[-a-zA-Z0-9_]+$/),
