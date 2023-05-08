@@ -168,3 +168,26 @@ example:
             def to_url(self, value):
                 return "%04d" % value
         ```
+
+#### Handling errors
+
+`#!js django.reverse()` will throw a `#!js django.urls.NoReverseMatch` error if:
+
+  - The name provided does not match any known URLs.
+  - The URL requires args, but none were provided.
+  - The URL received args, but their values failed validation.
+
+??? example "Example JavaScript code which handles `#!js NoReverseMatch`"
+
+    ``` js hl_lines="5" linenums="1"
+    try {
+      django.urls.reverse("missing:path")
+    }
+    catch(err) {
+      if (err.name === "NoReverseMatch") {
+        console.log("handle NoReverseMatch");
+      } else {
+        console.log("handle different error")
+      }
+    }
+    ```

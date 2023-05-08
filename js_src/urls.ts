@@ -23,7 +23,7 @@ class NoReverseMatch extends Error {
 export class URLs {
   protected paths: { [pathName: string]: PathInfo } = {};
   public Converter = Converter;
-  public static NoReverseMatch = NoReverseMatch;
+  public NoReverseMatch = NoReverseMatch;
   public readonly converters: Converters;
 
   constructor() {
@@ -42,7 +42,7 @@ export class URLs {
     // Find path
     const path = this.getPathInfo(name);
     if (path === undefined) {
-      throw new URLs.NoReverseMatch("not found", name);
+      throw new NoReverseMatch("not found", name);
     }
     // Insert kwargs into unformatted URL
     let url = path.route;
@@ -51,14 +51,14 @@ export class URLs {
       // Check that user passed this arg
       if ((kwargs === undefined) || !(argName in kwargs)) {
         const argNames = Object.keys(path.args).join(", ");
-        throw new URLs.NoReverseMatch(`missing keyword arguments (${argNames})`, name);
+        throw new NoReverseMatch(`missing keyword arguments (${argNames})`, name);
       }
       // Get the converter
       const converter = this.converters.get(converterName);
       const value = kwargs[argName];
       // Validate arg with converter
       if (!(converter.check(value))) {
-        throw new URLs.NoReverseMatch(`'${value}' is not a '${converterName}'`, name);
+        throw new NoReverseMatch(`'${value}' is not a '${converterName}'`, name);
       }
       // Insert arg into URL
       url = converter.convert(url, argName, value);
