@@ -30,5 +30,6 @@ nav:
   - Installation: installation.md
   - User Guide: user_guide.md
   - Contributing: contributing.md
+  - Changelog: changelog.md
 extra_css:
   - stylesheets/extra.css
