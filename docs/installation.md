@@ -1,14 +1,17 @@
 ## Install to Python environment using pip
 
-```sh
-pip install django-gesha
+``` console
+$ pip install django-gesha
 ```
 
 ## Install app in Django project
 
-Add `gesha` to [`INSTALLED_APPS`](https://docs.djangoproject.com/en/4.2/ref/settings/#installed-apps) in your Django project's
-[settings](https://docs.djangoproject.com/en/4.2/topics/settings/):
-```py
+Add `gesha` to
+[`INSTALLED_APPS`](https://docs.djangoproject.com/en/stable/ref/settings/#installed-apps)
+in your Django project's
+[settings](https://docs.djangoproject.com/en/stable/topics/settings/):
+
+``` py title="settings.py" hl_lines="3"
 INSTALLED_APPS = [
     ...
     "gesha",
@@ -17,10 +20,28 @@ INSTALLED_APPS = [
 
 ## Collect JavaScript assets
 
-Run the
-[`collectstatic`](https://docs.djangoproject.com/en/4.2/ref/contrib/staticfiles/#collectstatic)
-management command to collect django-gesha's JavaScript files. Django should locate
-them automatically once the [app is installed](#install-app-in-django-project).
-```sh
-python manage.py collectstatic
+Run [`collectstatic`](https://docs.djangoproject.com/en/stable/ref/contrib/staticfiles/#collectstatic)
+to collect **django-gesha**'s JavaScript files.
+
+``` console
+$ python manage.py collectstatic
 ```
+
+??? tip "Static file discovery"
+
+    Django should locate **django-gesha**'s JavaScript files automatically once the
+    [app is installed](#install-app-in-django-project).
+
+    To check that the JavaScript bundle has been collected:
+
+    === "POSIX"
+
+        ``` console
+        $ python manage.py findstatic gesha/dist/js/django-gesha.bundle.min.js
+        ```
+
+    === "Windows"
+
+        ``` doscon
+        C:\> python manage.py findstatic gesha\dist\js\django-gesha.bundle.min.js
+        ```
