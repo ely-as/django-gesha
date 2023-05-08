@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import include, path
+from django.urls import include, path, register_converter
 
-from . import views
+from . import converters, views
+
+register_converter(converters.FourDigitYearConverter, "yyyy")
 
 view = views.FakeView.as_view()  # shortcut
 
@@ -13,6 +15,7 @@ fake_urlpatterns: list = [
     # mainly for JS tests
     path("page/<int:num>", view, name="page"),
     path("<slug:slug>/<int:num>", view, name="named_page"),
+    path("articles/<yyyy:year>", view, name="custom_converter"),
 ]
 
 if settings.DEBUG:

@@ -138,3 +138,33 @@ Reverse URLs in JavaScript using the following function:
 !!! tip
 
     `#!js django.urls.reverse()` is aliased to `#!js django.reverse()`
+
+#### Custom converters
+
+If you have
+[registered custom path converters](https://docs.djangoproject.com/en/stable/topics/http/urls/#registering-custom-path-converters)
+in your Django project, you can also register them using the JavaScript API, for
+example:
+
+!!! example "Example path converter registration"
+
+    === "JavaScript"
+
+        ``` js linenums="1"
+        const fourDigitYearConverter = new django.urls.Converter("yyyy", /[0-9]{4}/);
+
+        django.urls.converters.register(fourDigitYearConverter);
+        ```
+
+    === "Python"
+
+        ``` py linenums="1"
+        class FourDigitYearConverter:
+            regex = "[0-9]{4}"
+
+            def to_python(self, value):
+                return int(value)
+
+            def to_url(self, value):
+                return "%04d" % value
+        ```

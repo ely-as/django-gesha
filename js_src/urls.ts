@@ -1,4 +1,4 @@
-import { Converters } from "./converters";
+import { Converter, Converters } from "./converters";
 
 export interface PathInfo {
   args: { [argName: string]: string };
@@ -22,6 +22,7 @@ class NoReverseMatch extends Error {
 
 export class URLs {
   protected paths: { [pathName: string]: PathInfo } = {};
+  public Converter = Converter;
   public static NoReverseMatch = NoReverseMatch;
   public readonly converters: Converters;
 

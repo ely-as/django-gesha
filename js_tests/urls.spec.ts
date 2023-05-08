@@ -11,6 +11,11 @@ interface TestURL {
 }
 
 describe("urls", () => {
+  before(async () => {
+    await loadDOMFromFile("test.html");
+    setup(window);
+  });
+
   describe("reverse()", () => {
     // defined in test_project/fake/urls.py
     const testURLs: TestURL[] = [
@@ -22,11 +27,6 @@ describe("urls", () => {
         expected_url: "/my-page/4"
       }
     ];
-
-    before(async () => {
-      await loadDOMFromFile("test.html");
-      setup(window);
-    });
 
     testURLs.forEach((params: TestURL) => {
       it(`can successfully reverse URL '${params.name}'`, () => {
@@ -52,9 +52,19 @@ describe("urls", () => {
         { name: "NoReverseMatch" }
       );
     });
+  });
 
-    after(async () => {
-      await cleanDOM();
+  describe("converters.register() + reverse()", () => {
+    it("can register a custom converter and successfully reverse URL", () => {
+      const fourDigitYearConverter = new window.django.urls.Converter("yyyy", /[0-9]{4}/);
+      window.django.urls.converters.register(fourDigitYearConverter);
+
+      const url = window.django.reverse("fake:custom_converter", { year: 2005 });
+      equal(url, "/articles/2005");
     });
+  });
+
+  after(async () => {
+    await cleanDOM();
   });
 });
