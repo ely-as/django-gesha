@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 import posixpath
 import re
 from collections.abc import Iterator
@@ -57,8 +58,13 @@ def iter_patterns(  # noqa: C901 (complexity: 6 > 5)
             yield from iter_patterns(url_pattern, current_name, current_route)
 
 
+@functools.lru_cache(maxsize=None)
+def _resolver_to_paths_dict(resolver: URLResolver) -> types.Paths:
+    return {p["name"]: p for p in iter_patterns(resolver)}
+
+
 def get_paths_dict(urlconf: types.URLConf | None = None) -> types.Paths:
     if urlconf is None:
         urlconf = get_urlconf()
     resolver = get_resolver(urlconf)
-    return {p["name"]: p for p in iter_patterns(resolver)}
+    return _resolver_to_paths_dict(resolver)

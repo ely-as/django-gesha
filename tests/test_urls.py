@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 
 import pytest
 from django.urls import include, path
@@ -77,7 +77,7 @@ def urlconf() -> Iterator[types.URLConf]:
 
 
 @pytest.fixture
-def paths_dict(urlconf) -> Iterator[types.Paths]:
+def paths_dict(urlconf: types.URLConf) -> Iterator[types.Paths]:
     yield urls.get_paths_dict(urlconf)
 
 
@@ -177,3 +177,36 @@ def test_pathjoin_returns_expected_result(
     args: list[str], expected_result: str
 ) -> None:
     assert urls.pathjoin(*args) == expected_result
+
+
+# Test caching
+
+
+@pytest.fixture
+def get_cache_info() -> Iterator[Callable]:
+    """Fixture will ensure cache is cleared before unit test is run."""
+    cache_func = urls._resolver_to_paths_dict
+    cache_func.cache_clear()
+    yield cache_func.cache_info
+
+
+def test_get_paths_dict_result_is_cached(get_cache_info: Callable) -> None:
+    urls.get_paths_dict()  # should get new result (1 miss)
+    urls.get_paths_dict()  # should get cached result (1 hit)
+    cache_info = get_cache_info()
+    assert cache_info.hits == 1
+    assert cache_info.misses == 1
+    assert cache_info.currsize == 1
+
+
+def test_get_paths_dict_result_is_reevaluated_if_urlconf_changes(
+    get_cache_info: Callable, urlconf: types.URLConf
+) -> None:
+    urls.get_paths_dict()
+    urls.get_paths_dict(urlconf)
+    urls.get_paths_dict()
+    urls.get_paths_dict(urlconf)
+    cache_info = get_cache_info()
+    assert cache_info.hits == 2
+    assert cache_info.misses == 2
+    assert cache_info.currsize == 2
