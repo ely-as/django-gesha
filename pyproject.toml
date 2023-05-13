@@ -64,6 +64,7 @@ test = [
     "pytest-cov",
     "pytest-django",
     "ruff",
+    "types-beautifulsoup4",
 ]
 
 [tool.coverage.run]
@@ -71,11 +72,14 @@ omit = ["test_project/*"]
 
 [tool.mypy]
 warn_unused_configs = true
-ignore_missing_imports = true
 files = [
     "gesha/**/*.py",
     "tests/**/*.py",
 ]
+
+[[tool.mypy.overrides]]
+module = "django.*"
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "fake.settings"
