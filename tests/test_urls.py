@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterator
+import unittest
+from collections.abc import Callable, Iterable, Iterator
 
 import pytest
 from django.urls import include, path
@@ -210,3 +211,30 @@ def test_get_paths_dict_result_is_reevaluated_if_urlconf_changes(
     assert cache_info.hits == 2
     assert cache_info.misses == 2
     assert cache_info.currsize == 2
+
+
+# Test filtering
+
+
+filter_expected_paths: list[tuple[Iterable[str], list[str]]] = [
+    ([], []),
+    (["*"], [p["name"] for p in expected_paths]),
+    (["ns1:", "*"], [p["name"] for p in expected_paths]),
+    (["inside*"], ["inside_unnamed_include"]),
+    (
+        ["*:*:*"],
+        ["ns1:ns2:double_nested_namespace", "ns1:ns2:leading_slash_in_namespaced_path"],
+    ),
+    (["ns1:index", "ns1:two_args"], ["ns1:index", "ns1:two_args"]),
+]
+
+
+@pytest.mark.parametrize("allowed_patterns,expected_path_names", filter_expected_paths)
+def test_get_paths_dict_allowed_patterns(
+    urlconf: types.URLConf,
+    allowed_patterns: Iterable[str],
+    expected_path_names: list[str],
+) -> None:
+    paths_dict = urls.get_paths_dict(urlconf, allowed_patterns=allowed_patterns)
+    case = unittest.TestCase()
+    case.assertCountEqual(paths_dict, expected_path_names)

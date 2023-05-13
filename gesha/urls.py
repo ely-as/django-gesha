@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import fnmatch
 import functools
 import posixpath
 import re
-from collections.abc import Iterator
+from collections.abc import Iterable, Iterator
 from urllib.parse import urljoin
 
 from django.urls import URLPattern, URLResolver, get_resolver, get_urlconf
@@ -59,12 +60,44 @@ def iter_patterns(  # noqa: C901 (complexity: 6 > 5)
 
 
 @functools.lru_cache(maxsize=None)
-def _resolver_to_paths_dict(resolver: URLResolver) -> types.Paths:
-    return {p["name"]: p for p in iter_patterns(resolver)}
+def _resolver_to_paths_dict(
+    resolver: URLResolver,
+    filter_regex: re.Pattern | None = None,
+) -> types.Paths:
+    paths_dict = {}
+    for path in iter_patterns(resolver):
+        if not filter_regex or (filter_regex and re.match(filter_regex, path["name"])):
+            paths_dict[path["name"]] = path
+    return paths_dict
 
 
-def get_paths_dict(urlconf: types.URLConf | None = None) -> types.Paths:
+@functools.lru_cache(maxsize=None)
+def create_filter_regex(*patterns: str) -> re.Pattern | None:
+    """Convert a list of shell-style patterns into a regular expression for use with
+    `re.match()`. Return None if the resulting pattern would match every input.
+
+    Supports Unix shell-style wildcards in URL filters including `*`, `?`, `[seq]` and
+    `[!seq]`. See https://docs.python.org/3/library/fnmatch.html.
+    """
+    if "*" in patterns:
+        return None
+    translated = []
+    for pattern in patterns:
+        translated.append(fnmatch.translate(pattern).replace(r"\Z", ""))
+    return re.compile(r"\A" + r"|".join(translated) + r"\Z")
+
+
+def get_paths_dict(
+    urlconf: types.URLConf | None = None,
+    allowed_patterns: Iterable[str] | None = None,
+) -> types.Paths:
+    """If `allowed_patterns` is not defined, all paths will be returned. Set to an
+    empty iterable to return no paths.
+    """
     if urlconf is None:
         urlconf = get_urlconf()
     resolver = get_resolver(urlconf)
-    return _resolver_to_paths_dict(resolver)
+    if allowed_patterns is None:
+        allowed_patterns = ["*"]
+    filter_regex = create_filter_regex(*allowed_patterns)
+    return _resolver_to_paths_dict(resolver, filter_regex)

@@ -9,3 +9,8 @@
 [data-md-color-scheme="slate"] {
   --md-hue: 43;
 }
+
+.md-sidebar.md-sidebar--secondary {
+  /* make ToC wider so setting names are not truncated */
+  width: 14rem;
+}
