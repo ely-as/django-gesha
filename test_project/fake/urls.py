@@ -12,6 +12,7 @@ view = views.FakeView.as_view()  # shortcut
 
 fake_urlpatterns: list = [
     path("", view, name="test"),
+    path("func-based/", views.function_based_view, name="test_func_based"),
     # mainly for JS tests
     path("page/<int:num>", view, name="page"),
     path("<slug:slug>/<int:num>", view, name="named_page"),

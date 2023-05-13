@@ -6,14 +6,17 @@ would like to use it with.
 
 ### Configure views
 
-Add `#!py gesha.mixins.JSContextMixin` to your class-based view, and add JavaScript
-context data by extending its `#!py get_js_context_data()` method:
+**django-gesha** requires you to add some context data to your views to work. See the
+following examples for class-based views and function-based views.
 
-!!! example "Example inclusion of `#!py JSContextMixin`"
+!!! example "Example class-based view"
+
+    Add `#!py gesha.mixins.JSContextMixin` to your class-based view, and add JavaScript
+    context data by extending its `#!py get_js_context_data()` method:
 
     === "myapp/views.py"
 
-        ``` py hl_lines="2 5 8" linenums="1"
+        ``` py hl_lines="2 5 8 9 10 11" linenums="1"
         from django.views.generic import TemplateView
         from gesha.mixins import JSContextMixin
 
@@ -35,6 +38,37 @@ context data by extending its `#!py get_js_context_data()` method:
 
         urlpatterns = [
             path("", views.HomeView.as_view(), name="home"),
+        ]
+        ```
+
+!!! example "Example function-based view"
+
+    === "myapp.views.py"
+
+        ``` py hl_lines="3 9 10 11" linenums="1"
+        from django.http import HttpRequest, HttpResponse
+        from django.shortcuts import render
+        from gesha.views import create_js_context_data
+
+
+        def home(request: HttpRequest) -> HttpResponse:
+            context = {}
+            context.update(
+                create_js_context_data(
+                    {"myNumber": 5, "myString": "this is my string"}
+                )
+            )
+            return render(request, "myapp/home.html", context=context)
+        ```
+
+    === "myapp/urls.py"
+
+        ``` py linenums="1"
+        from django.urls import path
+        from myapp import views
+
+        urlpatterns = [
+            path("", views.home, name="home"),
         ]
         ```
 
@@ -89,12 +123,13 @@ browser:
 
 ### Add context
 
-Override `#!py get_js_context_data()` to add context data. Data added here must be JSON
-serializable.
+Any context data added using the methods below must be JSON serializable.
 
-!!! example
+!!! example "Adding context in class-based views"
 
-    ``` py title="view"
+    For class-based views override `#!py get_js_context_data()` to add context data:
+
+    ``` py
     class HomeView(JSContextMixin, TemplateView):
         template_name = "myapp/home.html"
 
@@ -102,6 +137,22 @@ serializable.
             context = super().get_js_context_data(**kwargs)
             context.update({"myNumber": 5, "myString": "this is my string"})
             return context
+    ```
+
+!!! example "Adding context in class-based views"
+
+    For function-based views pass a dict to `#!py create_js_context_data()` to add
+    context data:
+
+    ``` py
+    def home(request):
+        context = {}
+        context.update(
+            create_js_context_data(
+                {"myNumber": 5, "myString": "this is my string"}
+            )
+        )
+        return render(request, "myapp/home.html", context=context)
     ```
 
 ### Reverse URLs

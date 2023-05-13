@@ -9,8 +9,16 @@ def request_soup(method: str, path: str) -> BeautifulSoup:
     return BeautifulSoup(response.content, "lxml")
 
 
-def test_jscontext_tag_generates_script_html() -> None:
+def test_jscontext_tag_plus_JSContextMixin_generates_script_html() -> None:
     soup = request_soup("GET", "/")
+    json_script = soup.find("script", id="js_context_data")
+    assert json_script
+    js_context = json.loads(json_script.text)
+    assert "myString" in js_context
+
+
+def test_jscontext_tag_plus_create_js_context_data_func_generates_script_html() -> None:
+    soup = request_soup("GET", "/func-based/")
     json_script = soup.find("script", id="js_context_data")
     assert json_script
     js_context = json.loads(json_script.text)
