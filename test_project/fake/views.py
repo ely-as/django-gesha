@@ -26,3 +26,13 @@ class FakeView(JSContextMixin, TemplateView):
 def function_based_view(request: HttpRequest) -> HttpResponse:
     context = create_js_context_data(CONTEXT)
     return render(request, TEMPLATE_NAME, context=context)
+
+
+# Async views
+
+
+async def async_view(request: HttpRequest) -> HttpResponse:
+    context = {}
+    js_context = create_js_context_data(CONTEXT)
+    context.update(js_context)
+    return render(request, TEMPLATE_NAME, context=context)

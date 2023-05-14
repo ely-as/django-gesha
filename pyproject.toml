@@ -65,6 +65,7 @@ test = [
     "pytest-django",
     "ruff",
     "types-beautifulsoup4",
+    "uvicorn",
 ]
 
 [tool.coverage.run]

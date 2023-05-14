@@ -1,5 +1,9 @@
+from __future__ import annotations
+
 import json
 
+import django
+import pytest
 from bs4 import BeautifulSoup
 from django.test import Client, override_settings
 
@@ -9,16 +13,20 @@ def request_soup(method: str, path: str) -> BeautifulSoup:
     return BeautifulSoup(response.content, "lxml")
 
 
-def test_jscontext_tag_plus_JSContextMixin_generates_script_html() -> None:
-    soup = request_soup("GET", "/")
-    json_script = soup.find("script", id="js_context_data")
-    assert json_script
-    js_context = json.loads(json_script.text)
-    assert "myString" in js_context
+paths_to_test_for_presence_of_valid_script_html: list[str] = [
+    "/",  # tests JSContextMixin
+    "/func-based/",  # tests create_js_context_data()
+]
+
+if django.VERSION[0] >= 3:
+    paths_to_test_for_presence_of_valid_script_html += [
+        "/async/",  # tests async
+    ]
 
 
-def test_jscontext_tag_plus_create_js_context_data_func_generates_script_html() -> None:
-    soup = request_soup("GET", "/func-based/")
+@pytest.mark.parametrize("path", paths_to_test_for_presence_of_valid_script_html)
+def test_jscontext_tag_generates_script_html(path: str) -> None:
+    soup = request_soup("GET", path)
     json_script = soup.find("script", id="js_context_data")
     assert json_script
     js_context = json.loads(json_script.text)

@@ -156,6 +156,14 @@ $ tox -m py3.8 # (1)!
     [`tox.ini`](https://github.com/ely-as/django-gesha/blob/main/tox.ini) for available
     Python labels.
 
+#### Run test project
+
+``` console
+$ cd test_project
+$ uvicorn fake.asgi:application --reload
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+```
+
 ### TypeScript
 
 #### Lint
