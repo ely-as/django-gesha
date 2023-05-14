@@ -18,7 +18,7 @@ paths_to_test_for_presence_of_valid_script_html: list[str] = [
     "/func-based/",  # tests create_js_context_data()
 ]
 
-if django.VERSION[0] >= 3:
+if (django.VERSION[0] >= 3 and django.VERSION[1] >= 1):
     paths_to_test_for_presence_of_valid_script_html += [
         "/async/",  # tests async
     ]
