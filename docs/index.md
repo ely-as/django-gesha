@@ -16,7 +16,8 @@ JavaScript utilities for [Django](https://www.djangoproject.com/) projects.
   - [Add context](user_guide/#add-context) in Django views to be used in JavaScript
     functions.
   - [Reverse URLs](user_guide/#reverse-urls) natively in JavaScript (equivalent to
-    `#!py reverse()` in Python and `#!django {% url %}` in templates).
+    `#!py reverse()` in Python and
+    <span style="white-space:nowrap;">`#!django {% url %}`</span> in templates).
   - Written in TypeScript and fully-typed Python.
 
 ---
