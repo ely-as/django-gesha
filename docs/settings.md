@@ -4,7 +4,7 @@
 
 ### <pre>**GESHA_ALLOWED_URL_PATTERNS**</pre>
 
-Default: `["*"]`
+Default: `[]`
 
 A list of allowed patterns for use in [reversing URLs](../user_guide/#reverse-urls).
 Supports [Unix shell-style wildcards](https://docs.python.org/3/library/fnmatch.html)
@@ -15,6 +15,6 @@ match `login`, `logout` and all paths in the `myapp` namespace:
 GESHA_ALLOWED_URL_PATTERNS = ["log*", "myapp:*"]
 ```
 
-Set to an empty list to disable all patterns.
+The default setting (an empty list) disables all patterns.
 
 ---

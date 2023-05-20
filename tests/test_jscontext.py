@@ -47,6 +47,13 @@ def test_jscontext_tag_works_when_setting_GESHA_JSCONTEXT_KEY_is_changed(
     assert json_script
 
 
+def test_paths_are_empty_by_default(path: str) -> None:
+    soup = request_soup("GET", path)
+    json_script = soup.find("script", id="js_context_data")
+    js_context = json.loads(json_script.text)  # type: ignore[union-attr]
+    assert js_context["_gesha"]["paths"] == {}
+
+
 def test_paths_are_empty_when_GESHA_ALLOWED_URL_PATTERNS_is_empty_list(
     path: str,
 ) -> None:

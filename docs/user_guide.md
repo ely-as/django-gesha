@@ -188,12 +188,8 @@ Reverse URLs in JavaScript using the following function:
 
 !!! tip
 
-    `#!js django.urls.reverse()` is aliased to `#!js django.reverse()`
-
-!!! tip
-
-    To limit the URLs available for reversing (e.g. for security reasons) configure
-    the [`GESHA_ALLOWED_URL_PATTERNS`](../settings/#gesha_allowed_url_patterns) setting.
+    To set the URLs available for reversing configure the
+    [`GESHA_ALLOWED_URL_PATTERNS`](../settings/#gesha_allowed_url_patterns) setting.
 
     These patterns can also be set in class-based views by overriding the
     `#!py get_allowed_url_patterns()` method, for example:
@@ -205,6 +201,10 @@ Reverse URLs in JavaScript using the following function:
         def get_allowed_url_patterns(self):
             return ["myapp:home", "otherapp:*"]
     ```
+
+!!! tip
+
+    `#!js django.urls.reverse()` is aliased to `#!js django.reverse()`
 
 #### Custom converters
 
