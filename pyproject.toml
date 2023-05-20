@@ -9,7 +9,7 @@ authors = [
 ]
 description = "JavaScript utilities for Django projects."
 requires-python = ">=3.8"
-keywords = ["django", "javascript"]
+keywords = ["django", "javascript", "typescript"]
 license = {text = "MIT"}
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -38,9 +38,9 @@ dependencies = [
 dynamic = ["version", "readme"]
 
 [project.urls]
-homepage = "https://django-gesha.readthedocs.io/en/latest/"
-repository = "https://github.com/ely-as/django-gesha"
-changelog = "https://github.com/ely-as/django-gesha/blob/main/CHANGELOG.md"
+"Documentation" = "https://django-gesha.readthedocs.io/en/latest/"
+"Issue Tracker" = "https://github.com/ely-as/django-gesha/issues"
+"Source" = "https://github.com/ely-as/django-gesha"
 
 [tool.setuptools.dynamic]
 version = {attr = "gesha.__version__"}
