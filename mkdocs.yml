@@ -11,6 +11,8 @@ theme:
     accent: amber
   features:
     - content.code.annotate
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
 markdown_extensions:
   - admonition
   - footnotes
