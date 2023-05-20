@@ -4,8 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from gesha.mixins import JSContextMixin
-from gesha.views import create_js_context_data
+import gesha
 
 TEMPLATE_NAME = "test.html"
 CONTEXT = {
@@ -14,7 +13,7 @@ CONTEXT = {
 }
 
 
-class FakeView(JSContextMixin, TemplateView):
+class FakeView(gesha.JSContextMixin, TemplateView):
     template_name = TEMPLATE_NAME
 
     def get_js_context_data(self, **kwargs) -> dict:
@@ -24,7 +23,7 @@ class FakeView(JSContextMixin, TemplateView):
 
 
 def function_based_view(request: HttpRequest) -> HttpResponse:
-    context = create_js_context_data(CONTEXT)
+    context = gesha.create_js_context_data(CONTEXT)
     return render(request, TEMPLATE_NAME, context=context)
 
 
@@ -33,6 +32,6 @@ def function_based_view(request: HttpRequest) -> HttpResponse:
 
 async def async_view(request: HttpRequest) -> HttpResponse:
     context = {}
-    js_context = create_js_context_data(CONTEXT)
+    js_context = gesha.create_js_context_data(CONTEXT)
     context.update(js_context)
     return render(request, TEMPLATE_NAME, context=context)

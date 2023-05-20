@@ -11,17 +11,17 @@ following examples for class-based views and function-based views.
 
 !!! example "Example class-based view"
 
-    Add `#!py gesha.mixins.JSContextMixin` to your class-based view, and add JavaScript
-    context data by extending its `#!py get_js_context_data()` method:
+    Add `#!py gesha.JSContextMixin` to your class-based view, and add JavaScript context
+    data by extending its `#!py get_js_context_data()` method:
 
     === "myapp/views.py"
 
         ``` py hl_lines="2 5 8 9 10 11" linenums="1"
+        import gesha
         from django.views.generic import TemplateView
-        from gesha.mixins import JSContextMixin
 
 
-        class HomeView(JSContextMixin, TemplateView):
+        class HomeView(gesha.JSContextMixin, TemplateView):
             template_name = "myapp/home.html"
 
             def get_js_context_data(self, **kwargs) -> dict:
@@ -46,15 +46,15 @@ following examples for class-based views and function-based views.
     === "myapp.views.py"
 
         ``` py hl_lines="3 9 10 11" linenums="1"
+        import gesha
         from django.http import HttpRequest, HttpResponse
         from django.shortcuts import render
-        from gesha.views import create_js_context_data
 
 
         def home(request: HttpRequest) -> HttpResponse:
             context = {}
             context.update(
-                create_js_context_data(
+                gesha.create_js_context_data(
                     {"myNumber": 5, "myString": "this is my string"}
                 )
             )
@@ -130,7 +130,7 @@ Any context data added using the methods below must be JSON serializable.
     For class-based views override `#!py get_js_context_data()` to add context data:
 
     ``` py
-    class HomeView(JSContextMixin, TemplateView):
+    class HomeView(gesha.JSContextMixin, TemplateView):
         template_name = "myapp/home.html"
 
         def get_js_context_data(self, **kwargs) -> dict:
@@ -148,7 +148,7 @@ Any context data added using the methods below must be JSON serializable.
     def home(request):
         context = {}
         context.update(
-            create_js_context_data(
+            gesha.create_js_context_data(
                 {"myNumber": 5, "myString": "this is my string"}
             )
         )
@@ -195,7 +195,7 @@ Reverse URLs in JavaScript using the following function:
     `#!py get_allowed_url_patterns()` method, for example:
 
     ``` py
-    class HomeView(JSContextMixin, TemplateView):
+    class HomeView(gesha.JSContextMixin, TemplateView):
         ...
 
         def get_allowed_url_patterns(self):
