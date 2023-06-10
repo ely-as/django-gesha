@@ -1,4 +1,4 @@
-const { dest, series } = require("gulp");
+const gulp = require("gulp");
 const browserify = require("browserify");
 const buffer = require("vinyl-buffer");
 const fancy_log = require("fancy-log");
@@ -25,7 +25,7 @@ var browserifyObj = browserify({
   packageCache: {},
 }).plugin(tsify)
 
-function bundle(cb) {
+function bundle() {
   return browserifyObj
     .bundle()
     .on("error", fancy_log)
@@ -36,10 +36,10 @@ function bundle(cb) {
       mangle: true
     }))
     .pipe(sourcemaps.write("./"))
-    .pipe(dest(paths.dest));
+    .pipe(gulp.dest(paths.dest));
 }
 
-function watch(cb) {
+function watch() {
   var watchedBrowserify = watchify(browserifyObj);
   bundle();
   watchedBrowserify.on("update", bundle);
