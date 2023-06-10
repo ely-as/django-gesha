@@ -19,11 +19,9 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install tox
-        # specify min_version if it's defined, or default to 0
         run: |
           python -m pip install --upgrade pip
-          MINVERSION=$(awk -F "=" "/min_version/ {print $2}" tox.ini | grep -o "[0-9.]*")
-          pip install "tox>=${MINVERSION:-0}"
+          pip install tox
       - name: Run tests
         run: tox -m ${{ matrix.python }}
 
