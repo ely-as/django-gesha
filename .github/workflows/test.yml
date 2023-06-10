@@ -6,40 +6,35 @@ jobs:
   test_python:
     name: Python tests
 
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        python: ['3.8', '3.9', '3.10', '3.11']
+        python: ["3.8", "3.9", "3.10", "3.11"]
+
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Setup Python
+      - uses: actions/checkout@v3
+      - name: Use Python ${{ matrix.python }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
       - name: Install tox
+        # specify min_version if it's defined, or default to 0
         run: |
           python -m pip install --upgrade pip
-          pip install "tox>=4.0"
-      - name: Run tox
-        run: tox -m py${{ matrix.python }}
-      - name: Upload pytest coverage results
-        uses: actions/upload-artifact@v3
-        with:
-          name: pytest-coverage-results-${{ matrix.python }}
-          path: coverage.xml
-        # Use always() to always run this step to publish test results when there are test failures
-        if: ${{ always() }}
+          MINVERSION=$(awk -F "=" "/min_version/ {print $2}" tox.ini | grep -o "[0-9.]*")
+          pip install "tox>=${MINVERSION:-0}"
+      - name: Run tests
+        run: tox -m ${{ matrix.python }}
 
   test_js:
     name: JavaScript tests
 
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
+
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
