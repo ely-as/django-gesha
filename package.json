@@ -2,10 +2,10 @@
   "name": "django-gesha",
   "version": "0.1.0-alpha3",
   "description": "JavaScript utilities for Django projects.",
-  "main": "gesha/static/gesha/dist/js/django-gesha.bundle.min.js",
+  "main": "./gesha/static/gesha/dist/js/django-gesha.bundle.min.js",
   "types": "./js_dist/main.d.ts",
   "directories": {
-    "test": "js_tests"
+    "test": "./js_tests"
   },
   "scripts": {
     "lint": "eslint ./js_*/**/*.ts",
