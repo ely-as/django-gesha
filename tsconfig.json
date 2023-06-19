@@ -3,5 +3,5 @@
     "noImplicitAny": true,
     "target": "es5"
   },
-  "include": ["js_src/**/*"]
+  "include": ["js_src/**/*.ts"]
 }

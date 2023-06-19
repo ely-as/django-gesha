@@ -6,5 +6,6 @@ module.exports = {
     indent: ["error", 2],
     quotes: ["error", "double"]
   },
-  root: true
+  root: true,
+  ignorePatterns: ["*.d.ts"]
 };
