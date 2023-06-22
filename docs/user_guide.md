@@ -112,10 +112,10 @@ You can test that the JavaScript API is available by opening the console on your
 browser:
 
 ``` js
->> console.log(django.context.myNumber)
+>> console.log(window.django.context.myNumber)
    5
 
->> console.log(django.context.myString)
+>> console.log(window.django.context.myString)
    "this is my string"
 ```
 
@@ -159,7 +159,7 @@ Any context data added using the methods below must be JSON serializable.
 
 Reverse URLs in JavaScript using the following function:
 
-`#!ts django.urls.reverse(name: string, kwargs?: ReverseKwargs): string`
+`#!ts window.django.urls.reverse(name: string, kwargs?: ReverseKwargs): string`
 
   - `#!ts name: string` – The namespaced URL name.
   - `#!ts kwargs?: { [argName: string]: number | string }` – URL arguments.
@@ -167,10 +167,10 @@ Reverse URLs in JavaScript using the following function:
 !!! example "Examples of URL reversing"
 
     ``` js
-    >> django.urls.reverse("myapp:home")
+    >> window.django.urls.reverse("myapp:home")
     "/"
 
-    >> django.reverse("myapp:page", { page: 5 })
+    >> window.django.reverse("myapp:page", { page: 5 })
     "/page/5/"
     ```
 
@@ -204,7 +204,7 @@ Reverse URLs in JavaScript using the following function:
 
 !!! tip
 
-    `#!js django.urls.reverse()` is aliased to `#!js django.reverse()`
+    `#!js window.django.urls.reverse()` is aliased to `#!js window.django.reverse()`
 
 #### Custom converters
 
@@ -218,9 +218,9 @@ example:
     === "JavaScript"
 
         ``` js linenums="1"
-        const fourDigitYearConverter = new django.urls.Converter("yyyy", /[0-9]{4}/);
+        const fourDigitYearConverter = new window.django.urls.Converter("yyyy", /[0-9]{4}/);
 
-        django.urls.converters.register(fourDigitYearConverter);
+        window.django.urls.converters.register(fourDigitYearConverter);
         ```
 
     === "Python"
@@ -238,7 +238,8 @@ example:
 
 #### Handling errors
 
-`#!js django.reverse()` will throw a `#!js django.urls.NoReverseMatch` error if:
+`#!js window.django.reverse()` will throw a `#!js window.django.urls.NoReverseMatch`
+error if:
 
   - The name provided does not match any known URLs.
   - The URL requires args, but none were provided.
@@ -248,7 +249,7 @@ example:
 
     ``` js hl_lines="5" linenums="1"
     try {
-      django.urls.reverse("missing:path")
+      window.django.urls.reverse("missing:path")
     }
     catch(err) {
       if (err.name === "NoReverseMatch") {
