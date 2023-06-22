@@ -11,6 +11,7 @@ theme:
     accent: amber
   features:
     - content.code.annotate
+    - navigation.footer
   logo: assets/logo.svg
   favicon: assets/favicon.svg
 markdown_extensions:
