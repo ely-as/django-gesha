@@ -1,3 +1,9 @@
+!!! tip "Starting a new project?"
+
+    Consider using
+    [**django-gesha-template**](https://github.com/ely-as/django-gesha-template), which
+    is pre-configured with **django-gesha** and a pipeline for TypeScript integration.
+
 ## Install to Python environment using pip
 
 ``` console

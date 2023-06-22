@@ -29,6 +29,17 @@ JavaScript utilities for [Django](https://www.djangoproject.com/) projects.
 
 ---
 
+## Getting started
+
+To install and set up **django-gesha** in an existing Django project, see:
+
+  - [Installation](https://django-gesha.readthedocs.io/en/latest/installation/)
+  - [User Guide](https://django-gesha.readthedocs.io/en/latest/user_guide/)
+
+Starting a new Django project? Consider using
+[**django-gesha-template**](https://github.com/ely-as/django-gesha-template), which is
+pre-configured with **django-gesha** and a pipeline for TypeScript integration.
+
 ## Contributing
 
 See [Contributing](https://django-gesha.readthedocs.io/en/latest/contributing/).
