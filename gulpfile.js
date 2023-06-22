@@ -1,7 +1,7 @@
 const gulp = require("gulp");
 const browserify = require("browserify");
 const buffer = require("vinyl-buffer");
-const cssmin = require('gulp-cssmin');
+const cleanCSS = require('gulp-clean-css');
 const fancy_log = require("fancy-log");
 const rename = require("gulp-rename");
 const source = require("vinyl-source-stream");
@@ -70,7 +70,7 @@ function types() {
 
 function docs_styles() {
   return gulp.src(paths.docs_styles.src, { sourcemaps: true })
-    .pipe(cssmin())
+    .pipe(cleanCSS())
     .pipe(rename({ suffix: ".min" }))
     .pipe(gulp.dest(paths.docs_styles.dest));
 }
