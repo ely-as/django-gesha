@@ -18,7 +18,7 @@ class JSContextMixin:
         }
 
     def get_allowed_url_patterns(self) -> Iterable[str]:
-        return get_setting("GESHA_ALLOWED_URL_PATTERNS")
+        return get_setting("GESHA_ALLOWED_URL_NAMES")
 
     def get_urlconf(self) -> types.URLConf | None:
         return None

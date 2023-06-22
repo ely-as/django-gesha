@@ -70,20 +70,20 @@ def test_JSON_paths_are_empty_by_default(path: str) -> None:
     assert js_context["_gesha"]["paths"] == {}
 
 
-def test_JSON_paths_are_empty_when_GESHA_ALLOWED_URL_PATTERNS_is_empty_list(
+def test_JSON_paths_are_empty_when_GESHA_ALLOWED_URL_NAMES_is_empty_list(
     path: str,
 ) -> None:
-    with override_settings(GESHA_ALLOWED_URL_PATTERNS=[]):
+    with override_settings(GESHA_ALLOWED_URL_NAMES=[]):
         soup = request_soup("GET", path)
     json_script = soup.find("script", id="js_context_data")
     js_context = json.loads(json_script.text)  # type: ignore[union-attr]
     assert js_context["_gesha"]["paths"] == {}
 
 
-def test_JSON_paths_are_filtered_when_GESHA_ALLOWED_URL_PATTERNS_is_set(
+def test_JSON_paths_are_filtered_when_GESHA_ALLOWED_URL_NAMES_is_set(
     path: str,
 ) -> None:
-    with override_settings(GESHA_ALLOWED_URL_PATTERNS=["fake:test"]):
+    with override_settings(GESHA_ALLOWED_URL_NAMES=["fake:test"]):
         soup = request_soup("GET", path)
     json_script = soup.find("script", id="js_context_data")
     js_context = json.loads(json_script.text)  # type: ignore[union-attr]
