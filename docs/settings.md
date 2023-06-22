@@ -2,7 +2,7 @@
 
 ---
 
-### <pre>**GESHA_ALLOWED_URL_PATTERNS**</pre>
+### <pre>**GESHA_ALLOWED_URL_NAMES**</pre>
 
 Default: `[]`
 
@@ -12,7 +12,7 @@ Supports [Unix shell-style wildcards](https://docs.python.org/3/library/fnmatch.
 match `login`, `logout` and all paths in the `myapp` namespace:
 
 ``` py
-GESHA_ALLOWED_URL_PATTERNS = ["log*", "myapp:*"]
+GESHA_ALLOWED_URL_NAMES = ["log*", "myapp:*"]
 ```
 
 The default setting (an empty list) disables all patterns.

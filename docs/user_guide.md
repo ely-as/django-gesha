@@ -189,7 +189,7 @@ Reverse URLs in JavaScript using the following function:
 !!! tip
 
     To set the URLs available for reversing configure the
-    [`GESHA_ALLOWED_URL_PATTERNS`](../settings/#gesha_allowed_url_patterns) setting.
+    [`GESHA_ALLOWED_URL_NAMES`](../settings/#GESHA_ALLOWED_URL_NAMES) setting.
 
     These patterns can also be set in class-based views by overriding the
     `#!py get_allowed_url_patterns()` method, for example:
