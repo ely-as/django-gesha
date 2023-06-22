@@ -1,5 +1,6 @@
 [data-md-color-primary="gesha"] {
   --md-primary-fg-color:        #6f4e37;
+  /* TODO: handle the following vars */
   /* --md-primary-fg-color--light: #6f4e37; */
   /* --md-primary-fg-color--dark:  #6f4e37; */
 
@@ -7,7 +8,9 @@
 }
 
 [data-md-color-scheme="slate"] {
-  --md-hue: 43;
+  --md-hue: 215;
+  /* original lightness was 21% - drop to 10% */
+  --md-default-bg-color: hsla(var(--md-hue),15%,10%,1);
 }
 
 .md-sidebar.md-sidebar--secondary {
