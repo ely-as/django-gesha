@@ -51,3 +51,24 @@ $ python manage.py collectstatic
         ``` doscon
         C:\> python manage.py findstatic gesha\dist\js\django-gesha.bundle.min.js
         ```
+
+## Advanced
+
+### Install to Node.js environment
+
+``` console
+$ npm install https://github.com/ely-as/django-gesha
+```
+
+### Import in TypeScript
+
+For example, in your main entry-point:
+
+``` ts title="main.ts"
+import "django-gesha";
+
+...
+```
+
+This would eliminate the need to [collect JavaScript assets](#collect-javascript-assets)
+and load them in your HTML template.
