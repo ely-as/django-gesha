@@ -35,4 +35,4 @@ nav:
   - Contributing: contributing.md
   - Changelog: changelog.md
 extra_css:
-  - stylesheets/extra.css
+  - stylesheets/extra.min.css

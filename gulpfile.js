@@ -1,7 +1,9 @@
 const gulp = require("gulp");
 const browserify = require("browserify");
 const buffer = require("vinyl-buffer");
+const cssmin = require('gulp-cssmin');
 const fancy_log = require("fancy-log");
+const rename = require("gulp-rename");
 const source = require("vinyl-source-stream");
 const sourcemaps = require("gulp-sourcemaps");
 const terser = require("gulp-terser");
@@ -20,6 +22,10 @@ const paths = {
   },
   types: {
     dest: "js_dist"
+  },
+  docs_styles: {
+    src: ["docs/stylesheets/extra.css"],
+    dest: "docs/stylesheets/"
   }
 };
 const tsProject = ts.createProject("tsconfig.json");
@@ -62,6 +68,13 @@ function types() {
     .pipe(gulp.dest(paths.types.dest));
 }
 
+function docs_styles() {
+  return gulp.src(paths.docs_styles.src, { sourcemaps: true })
+    .pipe(cssmin())
+    .pipe(rename({ suffix: ".min" }))
+    .pipe(gulp.dest(paths.docs_styles.dest));
+}
+
 const build = gulp.parallel(bundle, gulp.series(clean, types));
 
 function watch() {
@@ -69,10 +82,12 @@ function watch() {
   build();
   watchedBrowserify.on("update", build);
   watchedBrowserify.on("log", fancy_log);
+  gulp.watch(paths.docs_styles.src, docs_styles);
 }
 
 exports.build = build;
 exports.clean = clean;
-exports.default = exports.build;
+exports.default = gulp.parallel(build, docs_styles);
+exports.docs_styles = docs_styles;
 exports.types = types;
 exports.watch = watch;
