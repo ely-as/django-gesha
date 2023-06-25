@@ -72,7 +72,10 @@ test = [
 ]
 
 [tool.coverage.run]
-omit = ["test_project/*"]
+omit = [
+    "test_project/*",
+    "tests/*",
+]
 
 [tool.mypy]
 warn_unused_configs = true
