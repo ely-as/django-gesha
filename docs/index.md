@@ -1,6 +1,7 @@
 # django-gesha
 
 [![Test](https://github.com/ely-as/django-gesha/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/ely-as/django-gesha/actions/workflows/test.yml)
+[![Coverage](https://cov.ely.as/github/ely-as/django-gesha/main/badge.svg)](https://cov.ely.as/github/ely-as/django-gesha/main/latest/)
 [![Version](https://img.shields.io/pypi/v/django-gesha)](https://pypi.org/project/django-gesha/)
 ![Python](https://img.shields.io/pypi/pyversions/django-gesha)
 ![Django](https://img.shields.io/pypi/djversions/django-gesha)
