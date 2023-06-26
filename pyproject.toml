@@ -63,8 +63,8 @@ test = [
     "beautifulsoup4",
     "lxml",
     "mypy",
-    "pytest>=7",      # >=7 required for pythonpath option
-    "pytest-cov",
+    "pytest>=7",        # >=7 required for pythonpath option
+    "pytest-cov>=4.1",  # >=4.1 required for JSON reports
     "pytest-django",
     "ruff",
     "types-beautifulsoup4",
