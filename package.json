@@ -1,6 +1,6 @@
 {
   "name": "django-gesha",
-  "version": "0.1.0-alpha4",
+  "version": "0.1.0-alpha5",
   "description": "JavaScript utilities for Django projects.",
   "main": "./gesha/static/gesha/dist/js/django-gesha.bundle.min.js",
   "types": "./js_dist/main.d.ts",
